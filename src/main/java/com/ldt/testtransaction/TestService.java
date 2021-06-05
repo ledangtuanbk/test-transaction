@@ -8,12 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class TestService {
 
     @Autowired
-    TestRepository testRepository;
+    MyService myService;
 
-    @Transactional
-    public void test() throws Exception {
-        TestEntity testEntity = new TestEntity();
-        testRepository.save(testEntity);
-        throw new Exception("Test");
+    public void test(){
+        myService.test();
     }
 }

@@ -11,11 +11,30 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
 
     @Autowired
-    TestService testService;
+    TestRepository testRepository;
 
     @GetMapping("/get")
     @Transactional
-    public void uploadFile() throws Exception {
-        testService.test();
+    public void get() throws Exception {
+        TestEntity testEntity = new TestEntity();
+        testRepository.save(testEntity);
+        throw new Exception("test");
+    }
+
+    @GetMapping("/get2")
+    @Transactional(rollbackFor = {Exception.class, Throwable.class})
+    public void get2() throws Exception {
+        TestEntity testEntity = new TestEntity();
+        testRepository.save(testEntity);
+        throw new Exception("test");
+    }
+
+    @GetMapping("/get3")
+    @Transactional
+    public void get3() throws Exception {
+        TestEntity testEntity = new TestEntity();
+        testRepository.save(testEntity);
+        throw new Error("test");
+//        throw new RuntimeException("test");
     }
 }
